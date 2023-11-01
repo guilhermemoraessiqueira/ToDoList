@@ -50,4 +50,13 @@ public class TarefasService {
     public Tarefas buscarTarefaPorId(Long tarefaId) {
         return repository.findById(tarefaId).orElse(null);
     }
+
+    public void atualizarTituloEDescricao(Long idTarefa, String tituloNovo, String descricaoNova) {
+        Tarefas tarefas = repository.findById(idTarefa)
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
+
+        tarefas.setTitulo(tituloNovo);
+        tarefas.setDescricao(descricaoNova);
+        repository.save(tarefas);
+    }
 }
