@@ -24,38 +24,8 @@ public class TarefasService {
         repository.save(new Tarefas(dto));
     }
 
-    public List<TarefasDto> listarTarefaPendentes() {
-        List<Tarefas> tarefasPendentes = repository.findByStatus(StatusTarefasEnum.PENDENTE);
-
-        List<TarefasDto> tarefasDTOS = new ArrayList<>();
-
-        for (Tarefas tarefa : tarefasPendentes) {
-            tarefasDTOS.add(new TarefasDto(
-                    tarefa.getTitulo(),
-                    tarefa.getDescricao(),
-                    tarefa.getStatus(),
-                    tarefa.getDataDeCriacao()));
-        }
-        return tarefasDTOS;
-    }
-
-    public List<TarefasDto> listarTarefaFazendo() {
-        List<Tarefas> tarefasPendentes = repository.findByStatus(StatusTarefasEnum.FAZENDO);
-
-        List<TarefasDto> tarefasDTOS = new ArrayList<>();
-
-        for (Tarefas tarefa : tarefasPendentes) {
-            tarefasDTOS.add(new TarefasDto(
-                    tarefa.getTitulo(),
-                    tarefa.getDescricao(),
-                    tarefa.getStatus(),
-                    tarefa.getDataDeCriacao()));
-        }
-        return tarefasDTOS;
-    }
-
-    public List<TarefasDto> listarTarefaConcluido() {
-        List<Tarefas> tarefasPendentes = repository.findByStatus(StatusTarefasEnum.CONCLUÍDO);
+    public List<TarefasDto> listarTarefaPorStatus(StatusTarefasEnum status) {
+        List<Tarefas> tarefasPendentes = repository.findByStatus(status);
 
         List<TarefasDto> tarefasDTOS = new ArrayList<>();
 
@@ -80,5 +50,4 @@ public class TarefasService {
     public Tarefas buscarTarefaPorId(Long tarefaId) {
         return repository.findById(tarefaId).orElse(null);
     }
-
 }

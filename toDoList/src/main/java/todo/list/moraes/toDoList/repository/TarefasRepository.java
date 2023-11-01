@@ -1,7 +1,6 @@
 package todo.list.moraes.toDoList.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import todo.list.moraes.toDoList.enums.StatusTarefasEnum;
 import todo.list.moraes.toDoList.models.Tarefas;
 
