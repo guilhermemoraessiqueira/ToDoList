@@ -1,9 +1,6 @@
 package todo.list.moraes.toDoList.services;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 import todo.list.moraes.toDoList.dtos.IncluirTarefasDto;
 import todo.list.moraes.toDoList.dtos.TarefasDto;
@@ -36,6 +33,7 @@ public class TarefasService {
                     tarefa.getStatus(),
                     tarefa.getDataDeCriacao()));
         }
+
         return tarefasDTOS;
     }
 

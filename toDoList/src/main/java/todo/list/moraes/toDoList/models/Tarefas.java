@@ -9,8 +9,6 @@ import todo.list.moraes.toDoList.dtos.IncluirTarefasDto;
 import todo.list.moraes.toDoList.enums.StatusTarefasEnum;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-
 @Getter
 @Setter
 @AllArgsConstructor
