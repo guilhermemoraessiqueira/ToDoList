@@ -23,7 +23,7 @@ public class TarefasController {
     @Autowired
     private TarefasService service;
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     @Transactional
     public ResponseEntity cadastrar (@RequestBody @Valid IncluirTarefasDto dto){
         try {

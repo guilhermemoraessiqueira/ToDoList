@@ -11,5 +11,5 @@ public record IncluirTarefasDto(
         @NotBlank
         String descricao,
         StatusTarefasEnum statusTarefas,
-        Date dateDeCriacao) {
+        Date dataDeCriacao) {
 }
