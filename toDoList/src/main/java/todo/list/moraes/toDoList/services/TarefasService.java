@@ -9,6 +9,7 @@ import todo.list.moraes.toDoList.authentication.user.UserModel;
 import todo.list.moraes.toDoList.dtos.IncluirTarefasDto;
 import todo.list.moraes.toDoList.dtos.TarefasDto;
 import todo.list.moraes.toDoList.enums.StatusTarefasEnum;
+import todo.list.moraes.toDoList.exceptions.TarefaNotFoundException;
 import todo.list.moraes.toDoList.models.Tarefas;
 import todo.list.moraes.toDoList.repository.TarefasRepository;
 
@@ -71,5 +72,14 @@ public class TarefasService {
         tarefas.setTitulo(tituloNovo);
         tarefas.setDescricao(descricaoNova);
         repository.save(tarefas);
+    }
+
+    public void deletarTarefa(Long tarefaId) {
+        // Verifica se a tarefa existe antes de tentar deletar
+        if (repository.existsById(tarefaId)) {
+            repository.deleteById(tarefaId);
+        } else {
+            throw new TarefaNotFoundException("Tarefa não encontrada com o ID: " + tarefaId);
+        }
     }
 }

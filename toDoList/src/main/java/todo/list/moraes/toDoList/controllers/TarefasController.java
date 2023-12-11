@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import todo.list.moraes.toDoList.dtos.AlterarTituloEDescricao;
 import todo.list.moraes.toDoList.dtos.IncluirTarefasDto;
 import todo.list.moraes.toDoList.dtos.TarefasDto;
 import todo.list.moraes.toDoList.enums.StatusTarefasEnum;
+import todo.list.moraes.toDoList.exceptions.TarefaNotFoundException;
 import todo.list.moraes.toDoList.services.TarefasService;
 
 import java.util.List;
@@ -85,5 +87,17 @@ public class TarefasController {
         service.atualizarTituloEDescricao(id, tituloNovo, descricaoNova);
         return ResponseEntity.ok("Tarefa atualizada com sucesso!");
 
+    }
+
+    @DeleteMapping("/{id}/deletar-tarefa")
+    public ResponseEntity<String> deletarTarefa(@PathVariable Long id) {
+        try {
+            service.deletarTarefa(id);
+            return ResponseEntity.ok("Tarefa deletada com sucesso!");
+        } catch (TarefaNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao deletar a tarefa");
+        }
     }
 }
