@@ -8,7 +8,9 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import todo.list.moraes.toDoList.models.Tarefas;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class UserModel implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Tarefas> tasks = new ArrayList<>();
 
     public UserModel(String email, String password, UserRole userRole) {
         this.email = email;

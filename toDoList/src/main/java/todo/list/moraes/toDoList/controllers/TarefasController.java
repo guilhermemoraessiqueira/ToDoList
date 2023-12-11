@@ -5,7 +5,10 @@ import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import todo.list.moraes.toDoList.UserPrincipal;
+import todo.list.moraes.toDoList.authentication.user.UserModel;
 import todo.list.moraes.toDoList.dtos.AlterarStatusDto;
 import todo.list.moraes.toDoList.dtos.AlterarTituloEDescricao;
 import todo.list.moraes.toDoList.dtos.IncluirTarefasDto;
@@ -25,9 +28,12 @@ public class TarefasController {
 
     @PostMapping("/cadastrar")
     @Transactional
-    public ResponseEntity cadastrar (@RequestBody @Valid IncluirTarefasDto dto){
+    public ResponseEntity cadastrar (@RequestBody @Valid IncluirTarefasDto dto, @AuthenticationPrincipal UserModel userPrincipal){
+        UserModel currentUser = userPrincipal;
+
+        dto.setUser(currentUser);
         try {
-            service.incluir(dto);
+            service.incluir(dto, userPrincipal);
             return ResponseEntity.ok().build();
         } catch (ValidationException exception){
             return ResponseEntity.badRequest().body(exception.getMessage());
@@ -41,11 +47,11 @@ public class TarefasController {
     }
 
     @GetMapping("/{tarefaId}")
-    public ResponseEntity<Tarefas> obterTarefaPorId(@PathVariable Long tarefaId) {
-        Tarefas tarefas = service.buscarTarefaPorId(tarefaId);
+    public ResponseEntity<TarefasDto> obterTarefaPorId(@PathVariable Long tarefaId) {
+        TarefasDto tarefasDto = service.buscarTarefaPorId(tarefaId);
 
-        if (tarefas != null) {
-            return ResponseEntity.ok(tarefas);
+        if (tarefasDto != null) {
+            return ResponseEntity.ok(tarefasDto);
         } else {
             return ResponseEntity.notFound().build();
         }

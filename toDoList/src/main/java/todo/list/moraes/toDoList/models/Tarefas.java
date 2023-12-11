@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import todo.list.moraes.toDoList.authentication.user.UserModel;
 import todo.list.moraes.toDoList.dtos.IncluirTarefasDto;
+import todo.list.moraes.toDoList.dtos.TarefasDto;
 import todo.list.moraes.toDoList.enums.StatusTarefasEnum;
 
 import java.time.LocalDateTime;
@@ -30,12 +32,30 @@ public class Tarefas {
 
     private LocalDateTime  dataDeCriacao;
 
-    //private Long idUsuario; mais pra frente
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserModel user;
 
     public Tarefas(IncluirTarefasDto dto) {
         this.status = StatusTarefasEnum.PENDENTE;
-        this.titulo = dto.titulo();
-        this.descricao = dto.descricao();
+        this.titulo = dto.getTitulo();
+        this.descricao = dto.getDescricao();
         this.dataDeCriacao = LocalDateTime.now();
+        this.user = dto.getUser();
+    }
+
+    public Tarefas(String titulo, String descricao, StatusTarefasEnum status, LocalDateTime dataDeCriacao) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.status = status;
+        this.dataDeCriacao = dataDeCriacao;
+    }
+
+    public static Tarefas fromDto(TarefasDto tarefasDto) {
+        return new Tarefas(tarefasDto.titulo(), tarefasDto.descricao(), tarefasDto.status(), tarefasDto.dataDeCriacao());
+    }
+
+    public TarefasDto toDto() {
+        return new TarefasDto(this.titulo, this.descricao, this.status, this.dataDeCriacao);
     }
 }
