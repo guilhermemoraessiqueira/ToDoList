@@ -1,4 +1,4 @@
-package todo.list.moraes.toDoList;
+package todo.list.moraes.toDoList.authentication.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

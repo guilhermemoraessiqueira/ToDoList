@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import todo.list.moraes.toDoList.UserPrincipal;
 import todo.list.moraes.toDoList.authentication.user.UserModel;
 import todo.list.moraes.toDoList.dtos.AlterarStatusDto;
 import todo.list.moraes.toDoList.dtos.AlterarTituloEDescricao;
 import todo.list.moraes.toDoList.dtos.IncluirTarefasDto;
 import todo.list.moraes.toDoList.dtos.TarefasDto;
 import todo.list.moraes.toDoList.enums.StatusTarefasEnum;
-import todo.list.moraes.toDoList.models.Tarefas;
 import todo.list.moraes.toDoList.services.TarefasService;
 
 import java.util.List;
