@@ -2,7 +2,6 @@ package todo.list.moraes.toDoList.authentication.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import todo.list.moraes.toDoList.authentication.user.UserModel;
 
 import java.util.Collection;
 
@@ -52,6 +51,4 @@ public class UserPrincipal implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
-
-    // ... implementações de UserDetails
 }

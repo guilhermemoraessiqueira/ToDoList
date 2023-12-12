@@ -1,7 +1,5 @@
 package todo.list.moraes.toDoList.services;
 
-import org.apache.catalina.User;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
@@ -60,8 +58,6 @@ public class TarefasService {
             TarefasDto tarefasDto = tarefa.toDto();
             return tarefasDto;
         } else {
-            // Se a tarefa não foi encontrada, você pode decidir como lidar com isso.
-            // Aqui, estamos retornando null, mas você pode lançar uma exceção ou tomar outra ação apropriada.
             return null;
         }
     }
