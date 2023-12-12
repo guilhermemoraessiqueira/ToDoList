@@ -1,5 +1,7 @@
 package todo.list.moraes.toDoList.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
@@ -19,8 +21,10 @@ import todo.list.moraes.toDoList.services.TarefasService;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("tarefas")
+@SecurityRequirement(name = "bearer-key")
 public class TarefasController {
 
     @Autowired
