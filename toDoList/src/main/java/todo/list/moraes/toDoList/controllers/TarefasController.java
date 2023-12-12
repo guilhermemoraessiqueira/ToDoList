@@ -33,12 +33,12 @@ public class TarefasController {
     @PostMapping("/cadastrar")
     @Transactional
     public ResponseEntity cadastrar (@RequestBody @Valid IncluirTarefasDto dto, @AuthenticationPrincipal UserModel userPrincipal){
-        UserModel currentUser = userPrincipal;
 
+        UserModel currentUser = userPrincipal;
         dto.setUser(currentUser);
+
         try {
-            service.incluir(dto, userPrincipal);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(service.incluir(dto, userPrincipal));
         } catch (ValidationException exception){
             return ResponseEntity.badRequest().body(exception.getMessage());
         }

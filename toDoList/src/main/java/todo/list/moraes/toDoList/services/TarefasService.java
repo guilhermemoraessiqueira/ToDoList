@@ -22,10 +22,11 @@ public class TarefasService {
     @Autowired
     TarefasRepository repository;
 
-    public void incluir(IncluirTarefasDto dto, @AuthenticationPrincipal UserModel userPrincipal){
+    public TarefasDto incluir(IncluirTarefasDto dto, @AuthenticationPrincipal UserModel userPrincipal){
         UserModel currentUser = userPrincipal;
         dto.setUser(currentUser);
-        repository.save(new Tarefas(dto));
+
+        return repository.save(new Tarefas(dto)).toDto();
     }
 
     public List<TarefasDto> listarTarefaPorStatus(StatusTarefasEnum status) {
